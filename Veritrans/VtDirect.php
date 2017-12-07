@@ -28,7 +28,9 @@ class Veritrans_VtDirect {
     if (Veritrans_Config::$isSanitized) {
       Veritrans_Sanitizer::jsonRequest($payloads);
     }
-
+    
+    $payloads['transaction_details']['gross_amount'] = floatval($payloads['transaction_details']['gross_amount']);
+    
     $result = Veritrans_ApiRequestor::post(
         Veritrans_Config::getBaseUrl() . '/charge',
         Veritrans_Config::$serverKey,
